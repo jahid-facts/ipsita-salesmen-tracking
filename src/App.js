@@ -14,6 +14,7 @@ import { useIsAuthenticated } from "./hooks/AuthCheckHooks";
 import ShopsAssign from "./pages/ShopsAssign";
 import SalesmanTask from "./pages/SalesmanTask";
 import DateRange from "./pages/DateRange";
+import TrackingSalesman from "./pages/TrackingSalesman";
 
 function App() {
   const isAuthenticated = useIsAuthenticated();
@@ -69,6 +70,16 @@ function App() {
             element={
               isAuthenticated ? (
                 <DateRange />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/track-salesmen"
+            element={
+              isAuthenticated ? (
+                <TrackingSalesman />
               ) : (
                 <Navigate to="/login" replace />
               )

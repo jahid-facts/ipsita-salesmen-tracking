@@ -29,6 +29,11 @@ const sidebarContent = [
     path: "/date-range",
     icon: "fontisto:date",
   },
+  {
+    name: "Track salesmen",
+    path: "/track-salesmen",
+    icon: "logos:google-maps",
+  },
 ];
 
 export default sidebarContent;
