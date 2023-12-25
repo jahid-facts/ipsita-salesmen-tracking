@@ -37,27 +37,28 @@ const TrackingSalesman = () => {
       );
       setSalesman(validSalesmen);
       setSalesmanLocation(validSalesmen);
-      console.log("all users");
+      
     } catch (error) {
       toast.error("An error occurred while fetching data.");
     }
   };
 
   const updateLocation = async () => {
-    if (updateLocationRef.current) {
+    // if (updateLocationRef.current) {
       fetchSalesman();
-    } else {
-      try {
-        const response = await getApi(`users/${value.id}`);
-        const updatedUser = response?.data;
-        console.log(updatedUser);
-        // if (updatedUser.latitude !== null && updatedUser.longitude !== null) {
-        //   setSalesmanLocation([updatedUser]);
-        // }
-      } catch (error) {
-        console.error("Error fetching updated location:", error);
-      }
-    }
+      
+    // } else {
+    //   try {
+    //     const response = await getApi(`users/${value.id}`);
+    //     const updatedUser = response?.data;
+    //     console.log(updatedUser);
+    //     // if (updatedUser.latitude !== null && updatedUser.longitude !== null) {
+    //     //   setSalesmanLocation([updatedUser]);
+    //     // }
+    //   } catch (error) {
+    //     console.error("Error fetching updated location:", error);
+    //   }
+    // }
   };
 
   useEffect(() => {
@@ -75,8 +76,8 @@ const TrackingSalesman = () => {
   };
 
   return (
-    <AdminLayout title={"Track salesmen"}>
-      <Grid item xs={12} md={4}>
+    <AdminLayout title={"Where is the salesmen?"}>
+      {/* <Grid item xs={12} md={4}>
         <Box display={"flex"} mb={2}>
           <Autocomplete
             size="small"
@@ -112,7 +113,7 @@ const TrackingSalesman = () => {
             </Button>
           </div>
         </Box>
-      </Grid>
+      </Grid> */}
       <div style={{ height: "70vh", width: "100%" }}>
         <APIProvider apiKey={"AIzaSyBdcuJ6KdW5ZTT5x914iziur87UANrHf0k"}>
           <Map
@@ -124,7 +125,7 @@ const TrackingSalesman = () => {
                     lat: parseFloat(salesmanLocation[0].latitude),
                     lng: parseFloat(salesmanLocation[0].longitude),
                   }
-                : { lat: 2.879379792691538, lng: 101.54913740590888 }
+                : { lat: 3.0557691, lng: 101.5091893 }
             }
           >
             {salesmanLocation?.map((item) => {
