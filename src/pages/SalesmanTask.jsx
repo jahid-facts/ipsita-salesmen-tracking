@@ -283,7 +283,7 @@ const SalesmanTask = () => {
                       ) : (
                         <Chip
                           size="small"
-                          label="in-completed"
+                          label="incomplete"
                           color="secondary"
                         />
                       )}

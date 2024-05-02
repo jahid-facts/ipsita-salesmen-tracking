@@ -62,7 +62,9 @@ const ShopsList = () => {
             if (result.isConfirmed) {
               try {
                 await axios
-                  .delete(`${process.env.REACT_APP_API_BASE_URL}delete-shop/${itemId}`)
+                  .delete(
+                    `${process.env.REACT_APP_API_BASE_URL}delete-shop/${itemId}`
+                  )
                   .then((res) => {
                     toast.success(res.data?.message);
                   })
@@ -89,6 +91,49 @@ const ShopsList = () => {
           toast.success("Shop has been updated");
       }
       fetchData();
+    } catch (error) {
+      console.error("An error occurred while updating status.", error);
+    } finally {
+      handleMenuClose();
+    }
+  };
+
+  // handle on delete shop
+  const handleOnDelete = async (actionType) => {
+    try {
+      Swal.fire({
+        title: "Confirm Delete ?",
+        text: "Are you sure you want to delete all shops?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await axios
+              .delete(`${process.env.REACT_APP_API_BASE_URL}shop-on-delete`)
+              .then((res) => {
+                toast.success(res.data?.message);
+              })
+              .catch((err) => {
+                toast.error("An error occurred while deleting");
+              })
+              .finally(() => {
+                fetchData();
+              });
+          } catch (error) {
+            Swal.fire(
+              "Error",
+              "An error occurred while delete the item.",
+              "error"
+            );
+          }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire("Cancelled", "The shop was not deleted.", "info");
+        }
+      });
     } catch (error) {
       console.error("An error occurred while updating status.", error);
     } finally {
@@ -199,13 +244,23 @@ const ShopsList = () => {
       </Helmet>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Button
-            variant="outlined"
-            sx={{ textTransform: "capitalize", mb: 2 }}
-            onClick={handleOpen}
-          >
-            Add Shops
-          </Button>
+          <Box display={"flex"} gap={2}>
+            <Button
+              variant="contained"
+              sx={{ textTransform: "capitalize", mb: 2 }}
+              onClick={handleOpen}
+            >
+              Add Shops
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              sx={{ textTransform: "capitalize", mb: 2 }}
+              onClick={handleOnDelete}
+            >
+              Delete All Shops
+            </Button>
+          </Box>
           <TransitionsModal
             title={"Upload shops data use excel"}
             handleSubmit={handleSubmit}

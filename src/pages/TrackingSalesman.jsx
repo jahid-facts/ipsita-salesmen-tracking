@@ -63,8 +63,8 @@ const TrackingSalesman = () => {
 
   useEffect(() => {
     fetchSalesman();
-    const intervalId = setInterval(updateLocation, 5000);
-    return () => clearInterval(intervalId);
+    // const intervalId = setInterval(updateLocation, 5000);
+    // return () => clearInterval(intervalId);
   }, []);
 
   const handleLocation = () => {
