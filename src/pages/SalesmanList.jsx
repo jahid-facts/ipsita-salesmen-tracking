@@ -398,13 +398,27 @@ const SalesmanList = () => {
       </Helmet>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Button
-            variant="outlined"
-            sx={{ textTransform: "capitalize", mb: 2 }}
-            onClick={handleOpen}
-          >
-            Add Salesman
-          </Button>
+          <Box display={"flex"} gap={2}>
+            <Button
+              variant="contained"
+              sx={{ textTransform: "capitalize", mb: 2 }}
+              onClick={handleOpen}
+            >
+              Add Salesman
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              sx={{ textTransform: "capitalize", mb: 2 }}
+              onClick={() => {
+                setOpenEditPassword(true);
+                setItemId(1);
+              }}
+            >
+              Change Admin Password
+            </Button>
+          </Box>
+
           {/* salesman edit  */}
           <TransitionsModal
             title={"Edit user"}
@@ -467,7 +481,7 @@ const SalesmanList = () => {
                     variant="outlined"
                     fullWidth
                     id="password"
-                    label="Password Address"
+                    label="Password"
                     name="passwordEdit"
                     value={updatePassword}
                     onChange={(e) => setUpdatePassword(e.target.value)}
